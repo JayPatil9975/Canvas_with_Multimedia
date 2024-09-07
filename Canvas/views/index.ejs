@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia and Canvas Web App</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Multimedia and Canvas Web App</h1>
+
+    <!-- Display messages, like upload success/failure -->
+    <% if (typeof msg !== 'undefined') { %>
+        <p><%= msg %></p>
+    <% } %>
+
+    <!-- File upload form -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload File">
+    </form>
+
+    <!-- Display uploaded file if it exists -->
+    <% if (typeof file !== 'undefined') { %>
+        <div class="media">
+            <h2>Uploaded File:</h2>
+            <% if (file) { %>
+                <video src="<%= file %>" controls></video>
+            <% } %>
+        </div>        
+    <% } %>
+
+    <!-- Canvas drawing section -->
+    <div class="canvas-container">
+        <h2>Draw on the Canvas</h2>
+
+        <!-- Controls for pen size and color -->
+        <label for="pen-size">Pen Size: </label>
+        <input type="range" id="pen-size" min="1" max="20" value="5" />
+        <span id="pen-size-value">5</span>
+
+        <label for="pen-color">Choose Color: </label>
+        <input type="color" id="pen-color" value="#000000" />
+
+        <!-- Canvas for drawing -->
+        <canvas id="drawingCanvas" width="500" height="500"></canvas>
+        
+        <!-- Controls for canvas -->
+        <button id="clearCanvas">Clear Canvas</button>
+        <button id="saveCanvas">Save as Image</button>
+    </div>
+</div>
+
+<!-- Link to the external JavaScript file -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>
